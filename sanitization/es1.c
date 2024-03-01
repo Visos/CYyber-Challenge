@@ -1,4 +1,7 @@
 #include<stdio.h>
+#include <string.h>
+//size_t strcspn(const char *string1, const char *string2);
+
 
 int main(){
     FILE *stream = fopen("input/input1.txt", "r");
@@ -16,25 +19,33 @@ int main(){
     }
     else
         fscanf(stream,"%d %d", &n, &n1);
-        printf("%d %d   \n", n, n1);
-        fgets(bandit, 100, stream);
+        printf("%d %d   ", n, n1);
+        fgets(bandit,50, stream);   //solo per gettare la seconda riga
+
+        //fgets(bandit,10, stream);   //solo per gettare la seconda riga
+          //  printf("bandit= %s.", bandit);
+
+        
 
         //trovo le parole bandite
         for(i =1; i<n1+1; i++){
-            fgets(bandit, 100, stream);
-            printf(" bandit= %s.\n", bandit);
+            fgets(bandit, 50, stream);
         }
+            printf("bandit= %s.", bandit);
 
+ 
         int p =0;
+        
+
 
         //corrro e getto tutte le parole della lista
-        for(j =i; j<n; j++){
-            fgets(test, 100, stream);
+        for(i; i<n; i++){
+            fgets(test, 50, stream);
             p =0;
             flag = 1;
-            printf("parola = %s\n", test);
+            printf("%s=%s.\n", bandit,test);
             //confronto le parole lettera per lettera
-            while(test[p] != "\0" && flag){
+            while((test[p] != "\0" || test[p] != "\n") && flag){
                 printf("test[p] = %c\n", test[p]);
                 if(bandit[p] == test[p]){
                     p++;
@@ -53,8 +64,8 @@ int main(){
         }
 
 
-   /*
-   
+  /*
+  
    */
 
     return 0;
