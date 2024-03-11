@@ -1,0 +1,12 @@
+Crypto -> https://pycryptodome.readthedocs.io/en/latest/src/installation.html
+
+Padding oracle link -> https://robertheaton.com/2013/07/29/padding-oracle-attack/
+
+PadBuster per python -> https://python-paddingoracle.readthedocs.io/en/latest/
+
+Pwntools (usate remote per interagire con i servizi delle challenge) -> https://docs.pwntools.com/en/stable/index.html
+
+MTP (tool for many-time-pad attack) -> https://github.com/CameronLonsdale/MTP
+
+PIL python (Manipolazione immagini) -> https://pillow.readthedocs.io/en/stable/
+
