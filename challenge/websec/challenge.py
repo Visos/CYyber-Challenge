@@ -5,21 +5,25 @@ import requests
 
 app = Flask(__name__)
 
-"""
-@app.route("/")
-def index():
-    return Response(environ["FLAG"], mimetype="text/plain")
 
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
-"""
+url = 'http://web-06.challs.olicyber.it/token'
+url2 = 'http://web-06.challs.olicyber.it/flag'
 
-url = 'http://web-05.challs.olicyber.it/flag'
 
-a = {'Accept': 'application/xml'}
-password={'password': 'admin'}
+s = requests.Session()
 
-x = requests.get(url=url, cookies=password)
+##a = {'Accept': 'application/xml'}
+##password={'password': 'admin'}
+s.get(url)
+
+x = s.get(url=url2)
 print(x)
 print(x.content)
+
+
+
+bro = "666c61677b68337834646563696d616c5f63346e5f62335f41424144424142457d"
+ris = bytes.fromhex(bro)
+print(ris)
+
