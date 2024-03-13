@@ -35,16 +35,22 @@ print(out)
 """
 
 ciphertext = "104e137f425954137f74107f525511457f5468134d7f146c4c"
-
 p1 = bytes.fromhex(ciphertext)
+dictionary = {}
 
+print(p1)
+y =  (4).to_bytes(1, 'big')
+print(y)
+b = (11).to_bytes(1, 'big')
+h = b''
+for i in range (0,10):
+    h =h + b
+print("h= ",h)
 
-for n in range (0,128):
-    y =  (n).to_bytes(12, 'big')
-    print(y)
-    print(p1)
-    p2 = xor(p1,y)
-    print(p2)
-
-
-
+for n in range (0,256):
+    y =  (n).to_bytes(1, 'little')
+    p2 = xor(p1,h+y)
+    dictionary[n] = p2
+    print(p2.hex())
+    
+    

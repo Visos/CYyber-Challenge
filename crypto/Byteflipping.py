@@ -1,6 +1,6 @@
 from Secret_Byteflipping import token, oracle
 
-iv = token[:16]
+iv = token[:16]  ##stringa di cripting
 ciphered_name = token[16:]
 
 print(iv)
