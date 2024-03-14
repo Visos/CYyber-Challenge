@@ -34,29 +34,59 @@ print(out)
 
 """
 
-ciphertext = "104e137f425954137f74107f525511457f5468134d7f146c4c"
-p1 = bytes.fromhex(ciphertext)
-dictionary = {}
+# Python3 program to implement XOR - Encryption 
 
-bytesdecode = bytearray.fromhex(ciphertext).decode()
+# The same function is used to encrypt and 
+# decrypt 
+def encryptDecrypt(inpString): 
+
+	# Define XOR key 
+	# Any character value will work 
+	xorKey = '0'; 
+
+	# calculate length of input string 
+	length = len(inpString); 
+
+	# perform XOR operation of key 
+	# with every character in string 
+	for i in range(length): 
+	
+		inpString = (inpString[:i] +
+			chr(ord(inpString[i]) ^ ord(xorKey)) +
+					inpString[i + 1:]); 
+		print(inpString[i], end = ""); 
+	
+	return inpString; 
+
+
+
+
+ciphertext = "104e137f425954137f74107f525511457f5468134d7f146c4c"
+b1 = bytearray.fromhex(ciphertext)
+
+bytesdecode = bytearray.fromhex(ciphertext).decode() ## dopo questo decode dovrei trovare la chiave
 print(bytesdecode)
 
-key = 20
-key1 = key.to_bytes(1,'big')
-key1 = key1+key1+key1+key1+key1+key1+key1+key1+key1+key1+key1
+
+key = (20).to_bytes(1, 'big')
+full = b''
+bytelist = bytearray(1)
+for i in range (0,int(len(ciphertext)/2)):
+    full = full + key
+
+print('bytelist = ',full)
+
+
+##result = bytes(a ^ b for (a, b) in zip(ciphertext, full.hex()))
+
+##plain = result.hex()
+
+##a = bytearray.fromhex(plain).decode()
 
 
 
+a = encryptDecrypt(ciphertext)
+print(a)
 
-'''for n in range (0,256):
-    y =  (n).to_bytes(1, 'big')
-    b = b''
-    for i in range (0,12):
-        b = b + y
-        ##print(b)
-    p2 = xor(p1,b)
-    dictionary[n] = p2
-    plaintext = p2.hex()
-    print(plaintext)
-'''
+
     
