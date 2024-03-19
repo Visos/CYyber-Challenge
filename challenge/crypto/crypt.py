@@ -45,7 +45,7 @@ def xor_encryption(text, key):
     return encrypted_text
 
 # The plaintext that we want to encrypt
-plain_text = bytearray.fromhex("104e137f425954137f74107f525511457f5468134d7f146c4c").decode()
+plain_text = "104e137f425954137f74107f525511457f5468134d7f146c4c"
 # The secret key used for encryption
 key = "20"
 
@@ -70,7 +70,7 @@ bytekey = bytes.fromhex(l.encode().hex())*20
 print(bytekey)
 
 plain = xor(bytekey,chex)
-print(plain)
+print(plain.decode())
 
 
 
