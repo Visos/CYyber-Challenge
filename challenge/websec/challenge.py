@@ -7,23 +7,20 @@ app = Flask(__name__)
 
 
 
-url = 'http://web-06.challs.olicyber.it/token'
-url2 = 'http://web-06.challs.olicyber.it/flag'
+url = ' http://web-11.challs.olicyber.it/'
+url2 = 'http://web-11.challs.olicyber.it/flag_piece'
+flag = 'flag_piece/'
+login = 'login'
 
 
 s = requests.Session()
+payload = {"username": "admin", "password": "admin"}
 
-##a = {'Accept': 'application/xml'}
-##password={'password': 'admin'}
-s.get(url)
-
-x = s.get(url=url2)
-print(x)
-print(x.content)
+x = s.post(url=url+login, json= payload)
+csrf = x.json()["csrf"]
+print(x.cookies)
 
 
-
-bro = "666c61677b68337834646563696d616c5f63346e5f62335f41424144424142457d"
-ris = bytes.fromhex(bro)
-print(ris)
-
+x = s.get(url=url2, params=csrf)
+print(x.text)
+#print(csrf1)
