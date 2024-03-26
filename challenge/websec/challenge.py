@@ -7,11 +7,44 @@ app = Flask(__name__)
 s = requests.Session()
 
 
-url = 'http://web-14.challs.olicyber.it/'
+url = 'http://web-16.challs.olicyber.it/'
 text = s.get(url=url)
 html_doc = text.text
 soup = BeautifulSoup(html_doc, 'html.parser')
-print(soup.find('b'))
+
+boiadio = ''
+
+# copia tutte le pagine nella lista delle pagine visitate
+def getpage(all_page, temp):
+    for i in range(0, len(all_page)):
+        if all_page[i]['href'] not in pagelist:
+            temp.append(all_page[i]['href'])
+
+def checkpages(temp, url):
+    for i in range(0, len(temp)):
+        text = s.get(url=url+temp[i]).text
+        soup = BeautifulSoup(text,'html.parser')
+        allh1 = soup.find_all('h1')
+        print('all h1 = ', allh1)
+        for j in range(0, len(allh1)):
+            if 'flag' in allh1[j].contents:
+                return allh1[j].contents
+
+
+pagelist = []## lista di tutte le pagine visitate
+temp = [] ## lista delle pagine aggiute e da visitare
+all_page = soup.findAll('a')
+getpage(all_page, temp)         ##trova tutte le nuove pagine linkate e le aggiunge a temp
+checkpages(temp, url)           ##chek degli h1 di temp
+
+for i in range(0, len(temp)):
+    text = s.get(url=url+temp[i]).text
+
+
+    
+pagelist = pagelist+ temp
+
+
 
 
 
