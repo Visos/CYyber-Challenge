@@ -14,37 +14,44 @@ soup = BeautifulSoup(html_doc, 'html.parser')
 
 boiadio = ''
 
-# copia tutte le pagine nella lista delle pagine visitate
-def getpage(all_page, temp):
+##trova tutte le NUOVE pagine linkate e le aggiunge a temp
+def getpage(soup):
+    all_page = soup.findAll('a')
     for i in range(0, len(all_page)):
         if all_page[i]['href'] not in pagelist:
-            temp.append(all_page[i]['href'])
+            pagelist.append(all_page[i]['href'])
 
-def checkpages(temp, url):
+def checkh1(temp, url):
     for i in range(0, len(temp)):
         text = s.get(url=url+temp[i]).text
         soup = BeautifulSoup(text,'html.parser')
         allh1 = soup.find_all('h1')
-        print('all h1 = ', allh1)
         for j in range(0, len(allh1)):
             if 'flag' in allh1[j].contents:
                 return allh1[j].contents
+            
+def find_flag(pagelist, i):
+    if i< len(pagelist) and pagelist[i] not in read:
+        read.append(pagelist[i])
+        text = s.get(url=url+pagelist[i]).text
+        soup = BeautifulSoup(text,'html.parser')
+        allh1 = soup.find_all('h1')
+        print(allh1[0].contents)
+        if 'flag' in allh1[0].contents[0]:
+            print(pagelist[i])
+            return allh1[0].contents[0]
+        getpage(soup)
+    find_flag(pagelist, i+1)
+    return 0
 
 
-pagelist = []## lista di tutte le pagine visitate
+pagelist = []## lista di tutte le pagine 
 temp = [] ## lista delle pagine aggiute e da visitare
-all_page = soup.findAll('a')
-getpage(all_page, temp)         ##trova tutte le nuove pagine linkate e le aggiunge a temp
-checkpages(temp, url)           ##chek degli h1 di temp
+read = []   ##pagine gia visitate
+getpage(soup)         ##trova tutte le nuove pagine linkate e le aggiunge a temp
 
-for i in range(0, len(temp)):
-    text = s.get(url=url+temp[i]).text
-
-
-    
-pagelist = pagelist+ temp
-
-
+flag = find_flag(pagelist, 0)
+print(flag)
 
 
 
