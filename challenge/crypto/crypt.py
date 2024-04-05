@@ -33,44 +33,23 @@ out = xor(n1,n2)
 print(out)
 
 """
-def xor_encryption(text, key):
-    # Initialize an empty string for encrypted text
-    encrypted_text = ""
-    
-    # Iterate over each character in the text
-    for i in range(len(text)):
-        encrypted_text += chr(ord(text[i]) ^ ord(key[i % len(key)]))
-    
-    # Return the encrypted text
-    return encrypted_text
-
-# The plaintext that we want to encrypt
-plain_text = "104e137f425954137f74107f525511457f5468134d7f146c4c"
-# The secret key used for encryption
-key = "20"
-
-# Encrypt the plain_text using the key
-encrypted_text = xor_encryption(plain_text, key)
-# Print the encrypted text
-print(f'Encrypted Text: {encrypted_text}')
-
 
 
 ciphertext = "104e137f425954137f74107f525511457f5468134d7f146c4c"
 chex = bytes.fromhex(ciphertext)
-print(chex)
+#print(chex)
 
 bytesdecode = bytearray.fromhex(ciphertext).decode()
-print(bytesdecode)
+#print(bytesdecode)
 
 
 l = '20'
 
 bytekey = bytes.fromhex(l.encode().hex())*20
-print(bytekey)
+#print(bytekey)
 
 plain = xor(bytekey,chex)
-print(plain.decode())
+print(plain)
 
 
 
